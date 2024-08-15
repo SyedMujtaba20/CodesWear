@@ -105,6 +105,7 @@ export default function App({ Component, pageProps }) {
           subTotal={subTotal}
         />
       )}
+
       <Component
         buyNow={buyNow}
         cart={cart}
@@ -114,6 +115,7 @@ export default function App({ Component, pageProps }) {
         subTotal={subTotal}
         {...pageProps}
       />
+
       <Footer />
     </>
   );

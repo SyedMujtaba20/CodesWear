@@ -9,17 +9,31 @@ const handler = async (req, res) => {
     if (req.method == "POST") {
       let token = req.body.token;
       let user = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-      let dbuser = await User.findOneAndUpdate(
-        { email: user.email },
-        {
-          password: cryptoJS.AES.encrypt(
-            req.body.password,
-            process.env.AES_SECRET
-          ).toString(),
-        }
+      let dbuser = await User.findOne({ email: user.email });
+      const bytes = cryptoJS.AES.decrypt(
+        dbuser.password,
+        process.env.AES_SECRET
       );
+      let decryptedPass = bytes.toString(cryptoJS.enc.Utf8);
+      if (
+        decryptedPass == req.body.password &&
+        req.body.npassword == req.body.cpassword
+      ) {
+        let dbuseru = await User.findOneAndUpdate(
+          { email: user.email },
+          {
+            password: cryptoJS.AES.encrypt(
+              req.body.cpassword,
+              process.env.AES_SECRET
+            ).toString(),
+          }
+        );
+        res.status(200).json({ success: true });
+        return;
+      }
+
       //   const { name, email, address, pincode, phone } = dbuser;
-      res.status(200).json({ success: true });
+      res.status(200).json({ success: false });
     } else {
       res.status(400).json({ error: "error" });
     }

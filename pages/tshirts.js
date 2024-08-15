@@ -7,9 +7,15 @@ const Tshirts = ({ products }) => {
   console.log(products);
   return (
     <div>
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font min-h-screen">
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap justify-center -m-4">
+          <div className="flex flex-wrap justify-center -m-4  mx-5">
+            {Object.keys(products).length === 0 && (
+              <p>
+                Sorry all the Tshirts are currently out of stock. New stock
+                coming soon. Stay Tuned!
+              </p>
+            )}
             {/* <Link href={"/product/wear-the-code"} passHref={true}> */}
             {Object.keys(products).map((item) => {
               return (
@@ -42,22 +48,22 @@ const Tshirts = ({ products }) => {
                       <div className="mt-1">
                         {products[item].size.includes("S") && (
                           <span className="border border-gray-600 px-1 mx-1">
-                            S,
+                            S
                           </span>
                         )}
                         {products[item].size.includes("M") && (
                           <span className="border border-gray-300 px-1 mx-1">
-                            M,
+                            M
                           </span>
                         )}
                         {products[item].size.includes("L") && (
                           <span className="border border-gray-300 px-1 mx-1">
-                            L,
+                            L
                           </span>
                         )}
                         {products[item].size.includes("XL") && (
                           <span className="border border-gray-300 px-1 mx-1">
-                            XL,
+                            XL
                           </span>
                         )}
                         {products[item].size.includes("XXL") && (

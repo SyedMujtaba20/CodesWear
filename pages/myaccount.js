@@ -11,8 +11,9 @@ const MyAccount = () => {
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [user, setUser] = useState({ value: null });
-  const [password, setPassword] = useState();
-  const [cpassword, setCpassword] = useState();
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+  const [npassword, setNpassword] = useState("");
   const router = useRouter();
   useEffect(() => {
     const myuser = JSON.parse(localStorage.getItem("myuser"));
@@ -53,29 +54,51 @@ const MyAccount = () => {
       body: JSON.stringify(data),
     });
     let res = await a.json();
-    toast.success("Successfully Updated Details!", {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
+    if (res.success) {
+      toast.success("Successfully Updated Details!", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else {
+      toast.error("Error Updating Password!", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
   };
 
   const handlePasswordSubmit = async () => {
-    let data = { token: user.token, password, cpassword };
-    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/updatepassword`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    let res = await a.json();
+    let res;
+    if (npassword == cpassword) {
+      let data = { token: user.token, password, cpassword, npassword };
+      let a = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST}/api/updatepassword`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      res = await a.json();
+    } else {
+      res = { success: false };
+    }
     toast.success("Successfully Updated Password!", {
       position: "top-left",
       autoClose: 5000,
@@ -87,6 +110,9 @@ const MyAccount = () => {
       theme: "light",
       transition: Bounce,
     });
+    setPassword("");
+    setCpassword("");
+    setNpassword("");
   };
 
   const handleChange = async (e) => {
@@ -111,6 +137,8 @@ const MyAccount = () => {
       setPassword(e.target.value);
     } else if (e.target.name == "cpassword") {
       setCpassword(e.target.value);
+    } else if (e.target.name == "npassword") {
+      setNpassword(e.target.value);
     }
   };
   return (
@@ -248,10 +276,26 @@ const MyAccount = () => {
             />
           </div>
         </div>
+
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label for="name" className="leading-7 text-sm text-gray-600">
-              Confirm Password
+              New Password
+            </label>
+            <input
+              onChange={handleChange}
+              value={npassword}
+              type="password"
+              id="npassword"
+              name="npassword"
+              className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+          </div>
+        </div>
+        <div className="px-2 w-1/2">
+          <div className="mb-4">
+            <label for="name" className="leading-7 text-sm text-gray-600">
+              Confirm New Password
             </label>
             <input
               onChange={handleChange}

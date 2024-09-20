@@ -23,18 +23,8 @@ const handler = async (req, res) => {
       res.status(400).json({ error: "error" });
     }
   } catch (error) {
-    // console.error("Database query error:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 export default connectDb(handler);
-
-// const connectDb = (handler) => async (req, res) => {
-//   if (mongoose.connections[0].readyState !== 1) {
-//     await mongoose.connect(process.env.MONGO_URI);
-//   }
-//   return handler(req, res);
-// };
-
-// export default connectDb;

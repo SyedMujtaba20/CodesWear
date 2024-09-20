@@ -37,7 +37,6 @@ const Contact = () => {
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
       // Submit the form (e.g., send data to the backend)
-      // console.log("Form submitted:", formData);
       setIsSubmitted(true);
     } else {
       setErrors(validationErrors);

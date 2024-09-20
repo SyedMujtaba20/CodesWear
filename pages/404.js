@@ -8,7 +8,7 @@ export default function Customer404() {
           404 - Page Not Found
         </h1>
         <p className="text-lg text-gray-600 mb-6">
-          Oops! The page you're looking for doesn't exist.
+          Oops! The page you&apos;re looking for doesn&apos;t exist.
         </p>
         <img
           src="https://lh6.googleusercontent.com/Bu-pRqU_tWZV7O3rJ5nV1P6NjqFnnAs8kVLC5VGz_Kf7ws0nDUXoGTc7pP87tyUCfu8VyXi0YviIm7CxAISDr2lJSwWwXQxxz98qxVfMcKTJfLPqbcfhn-QEeOowjrlwX1LYDFJN"
@@ -16,8 +16,8 @@ export default function Customer404() {
           className="w-full h-auto mb-6"
         />
         <p className="text-sm text-gray-500 mb-6">
-          It looks like you've taken a wrong turn. Here are some helpful links
-          to get you back on track:
+          It looks like you&apos;ve taken a wrong turn. Here are some helpful
+          links to get you back on track:
         </p>
         <div className="flex justify-center space-x-4">
           <a

@@ -27,24 +27,16 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { name, email, password };
-    console.log("Submitting form", data);
-    console.log("jujujuj");
 
     try {
-      console.log("jjjjjjjjjjjjj");
       const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }); // console.log(data.method); // This will log the request method to the console
+      });
       const response = await res.json();
-      console.log("Response from API", res);
-      console.log("API Host:", process.env.NEXT_PUBLIC_HOST);
-
-      console.log("yyyyyyyyy");
-      console.log("Success:", response);
 
       if (res.ok) {
         setEmail("");
@@ -73,8 +65,6 @@ const Signup = () => {
         });
       }
     } catch (error) {
-      console.log("eeeeeee");
-      console.error("Error during sign up:", error);
       toast.error("An error occurred while creating your account.", {
         position: "top-left",
         autoClose: 5000,
@@ -200,7 +190,6 @@ const Signup = () => {
                     />
                   </svg>
                 </span>
-                {console.log("newwwwww")}
                 Sign up
               </button>
             </div>

@@ -16,12 +16,12 @@ const About = () => {
           About Codeswear
         </Typography>
         <Typography variant="body1" sx={{ mt: 2, textAlign: "justify" }}>
-          At Codeswear, we believe that clothing is more than just fabric—it's a
-          statement, a reflection of your personality, and a representation of
-          your love for coding and tech culture. Founded with the mission to
-          create apparel that resonates with coders, designers, and tech
-          enthusiasts, Codeswear combines high-quality materials with creative
-          designs inspired by the tech world.
+          At Codeswear, we believe that clothing is more than just
+          fabric—it&apos;s a statement, a reflection of your personality, and a
+          representation of your love for coding and tech culture. Founded with
+          the mission to create apparel that resonates with coders, designers,
+          and tech enthusiasts, Codeswear combines high-quality materials with
+          creative designs inspired by the tech world.
         </Typography>
 
         <Box sx={{ mt: 4 }}>
@@ -66,8 +66,8 @@ const About = () => {
           <Typography variant="body1" sx={{ mt: 2, textAlign: "justify" }}>
             Join our growing community of tech enthusiasts who wear Codeswear
             not just because it looks good, but because it speaks to their
-            identity. Follow us on social media, and don't forget to tag us when
-            you wear your Codeswear!
+            identity. Follow us on social media, and don&apos;t forget to tag us
+            when you wear your Codeswear!
           </Typography>
         </Box>
       </Box>

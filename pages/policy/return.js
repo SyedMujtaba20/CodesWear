@@ -10,8 +10,8 @@ const ReturnPolicy = () => {
 
         <p className="text-lg text-gray-600 mb-6">
           At Codeswear, we want you to be completely satisfied with your
-          purchase. If you're not happy with the product, we're here to help
-          with returns and exchanges.
+          purchase. If you&apos;re not happy with the product, we&apos;re here
+          to help with returns and exchanges.
         </p>
 
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
@@ -65,7 +65,7 @@ const ReturnPolicy = () => {
 
         <p className="text-lg text-gray-600 mb-6">
           If you have any further questions about our return policy, please
-          don't hesitate to reach out to us at{" "}
+          don&apos;t hesitate to reach out to us at{" "}
           <a
             href="mailto:codeswear@gmail.com"
             className="text-blue-500 underline"

@@ -4,7 +4,6 @@ import Product from "@/models/Product";
 import mongoose from "mongoose";
 
 const Tshirts = ({ products }) => {
-  // console.log(products);
   return (
     <div>
       <section className="text-gray-600 body-font min-h-screen">
@@ -16,7 +15,6 @@ const Tshirts = ({ products }) => {
                 coming soon. Stay Tuned!
               </p>
             )}
-            {/* <Link href={"/product/wear-the-code"} passHref={true}> */}
             {Object.keys(products).map((item) => {
               return (
                 <div
@@ -28,13 +26,11 @@ const Tshirts = ({ products }) => {
                     href={`/product/${products[item].slug}`}
                     className="block relative  rounded overflow-hidden"
                   >
-                    {/* <a className="block relative  rounded overflow-hidden"> */}
                     <img
                       alt="ecommerce"
                       className="m-auto md:mx-0 md:h-[36vh] h-[30vh] block"
                       src={products[item].img}
                     />
-                    {/* </a> */}
                   </Link>
                   <Link href={`/product/${products[item].slug}`}>
                     <div className="mt-4 text-center md:text-left">
@@ -73,7 +69,6 @@ const Tshirts = ({ products }) => {
                         )}
                       </div>
                       <div className="mt-1">
-                        {/* <p>{products[item].color}</p> */}
                         {products[item].color.includes("Red") && (
                           <button className="border-2 border-gray-300 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>
                         )}
@@ -104,7 +99,6 @@ const Tshirts = ({ products }) => {
                 </div>
               );
             })}
-            {/* </Link> */}
           </div>
         </div>
       </section>

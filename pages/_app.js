@@ -21,7 +21,6 @@ export default function App({ Component, pageProps }) {
         saveCart(JSON.parse(localStorage.getItem("cart")));
       }
     } catch (error) {
-      // console.error(error);
       localStorage.clear();
     }
     const myuser = JSON.parse(localStorage.getItem("myuser"));

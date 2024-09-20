@@ -4,13 +4,11 @@ import Product from "@/models/Product";
 import mongoose from "mongoose";
 
 const Hoodies = ({ products }) => {
-  // console.log(products);
   return (
     <div>
       <section className="text-gray-600 body-font min-h-screen">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap justify-center -m-4  mx-5">
-            {/* <Link href={"/product/wear-the-code"} passHref={true}> */}
             {Object.keys(products).length === 0 && (
               <p>
                 Sorry all the Hoodies are currently out of stock. New stock
@@ -28,13 +26,11 @@ const Hoodies = ({ products }) => {
                     href={`/product/${products[item].slug}`}
                     className="block relative  rounded overflow-hidden"
                   >
-                    {/* <a className="block relative  rounded overflow-hidden"> */}
                     <img
                       alt="ecommerce"
                       className="m-auto md:mx-0 md:h-[36vh] h-[30vh] block"
                       src={products[item].img}
                     />
-                    {/* </a> */}
                   </Link>
                   <Link href={`/product/${products[item].slug}`}>
                     <div className="mt-4 text-center md:text-left">
@@ -103,7 +99,6 @@ const Hoodies = ({ products }) => {
                 </div>
               );
             })}
-            {/* </Link> */}
           </div>
         </div>
       </section>

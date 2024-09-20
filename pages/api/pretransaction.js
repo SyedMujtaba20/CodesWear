@@ -151,7 +151,6 @@ const handler = async (req, res) => {
           });
 
           post_res.on("end", function () {
-            // console.log("Response: ", response);
             let ress = JSON.parse(response).body;
             ress.success = true;
             (ress.cartClear = false), resolve(ress);

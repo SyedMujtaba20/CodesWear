@@ -11,9 +11,7 @@ import {
 import BaseCard from "../baseCard/BaseCard";
 
 const AllProducts = ({ products = [] }) => {
-  useEffect(() => {
-    // console.log(products);
-  }, [products]);
+  useEffect(() => {}, [products]);
 
   return (
     <BaseCard title="All Products">
@@ -60,7 +58,6 @@ const AllProducts = ({ products = [] }) => {
           {products.length > 0 ? (
             products.map((product) => (
               <TableRow key={product.slug}>
-                {/* Title */}
                 <TableCell>
                   <Typography
                     sx={{

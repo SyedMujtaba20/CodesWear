@@ -63,9 +63,6 @@ const Slug = ({ addToCart, product, variants, buyNow, error }) => {
     if (variants[newcolor] && variants[newcolor][newsize]) {
       let url = `${process.env.NEXT_PUBLIC_HOST}/product/${variants[newcolor][newsize]["slug"]}`;
       router.push(url);
-    } else {
-      // console.error("Selected variant not found.");
-      // Handle error case
     }
   };
 
@@ -86,12 +83,7 @@ const Slug = ({ addToCart, product, variants, buyNow, error }) => {
           draggable
           pauseOnHover
         />
-        {/* {console.log(
-          "*****************************" +
-            variants +
-            "*****************************"
-        )}
-        {console.log(variants)} */}
+
         <div className="container px-5 py-16 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
@@ -112,87 +104,6 @@ const Slug = ({ addToCart, product, variants, buyNow, error }) => {
                 <div className="flex">
                   <span className="mr-3">Color</span>
 
-                  {/* {Object.keys(variants).includes("White") &&
-                    variants["White"][size] && (
-                      <button
-                        onClick={() => {
-                          refreshVariant("White", size);
-                        }}
-                        className={`border-2 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "White" ? "border-black" : "border-gray-300"
-                        }`}
-                      ></button>
-                    )}
-                  {Object.keys(variants).includes("Red") &&
-                    variants["Red"][size] && (
-                      <button
-                        onClick={() => {
-                          refreshVariant("Red", size);
-                        }}
-                        className={`border-2 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "Red" ? "border-black" : "border-gray-300"
-                        }`}
-                      ></button>
-                    )}
-                  {Object.keys(variants).includes("Black") &&
-                    variants["Black"][size] && (
-                      <button
-                        onClick={() => {
-                          refreshVariant("Black", size);
-                        }}
-                        className={`border-2 ml-1 bg-black-700 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "Black" ? " border-black" : "border-white"
-                        }`}
-                      ></button>
-                    )}
-                  {Object.keys(variants).includes("Green") &&
-                    variants["Green"][size] && (
-                      <button
-                        onClick={() => {
-                          refreshVariant("Green", size);
-                        }}
-                        className={`border-2 ml-1 bg-green-500 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "Green" ? "border-black" : "border-gray-300"
-                        }`}
-                      ></button>
-                    )}
-                  {Object.keys(variants).includes("Purple") &&
-                    variants["Purple"][size] && (
-                      <button
-                        onClick={() => {
-                          refreshVariant("Purple", size);
-                        }}
-                        className={`border-2 ml-1 bg-purple-700 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "Purple"
-                            ? "border-black"
-                            : "border-gray-300"
-                        }`}
-                      ></button>
-                    )}
-                  {Object.keys(variants).includes("Blue") &&
-                    variants["Blue"][size] && (
-                      <button
-                        onClick={() => {
-                          refreshVariant("Blue", size);
-                        }}
-                        className={`border-2 ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "Blue" ? "border-black" : "border-gray-300"
-                        }`}
-                      ></button>
-                    )}
-                  {Object.keys(variants).includes("Yellow") &&
-                    variants["Yellow"][size] && (
-                      <button
-                        onClick={() => {
-                          refreshVariant("Yellow", size);
-                        }}
-                        className={`border-2 ml-1 bg-yellow-500 rounded-full w-6 h-6 focus:outline-none ${
-                          color === "Yellow"
-                            ? "border-black"
-                            : "border-gray-300"
-                        }`}
-                      ></button>
-                    )} */}
                   {Object.keys(variants).map(
                     (variantColor) =>
                       variants[variantColor][size] && (

@@ -33,11 +33,6 @@ const Forgot = () => {
       body: JSON.stringify(data),
     });
     let res = await a.json();
-    if (res.success) {
-      // console.log("Password reset instructions have been sent to your email.");
-    } else {
-      // console.log("error");
-    }
   };
   const resetPassword = async () => {
     if (password == cpassword) {
@@ -50,11 +45,6 @@ const Forgot = () => {
         body: JSON.stringify(data),
       });
       let res = await a.json();
-      if (res.success) {
-        // console.log("Password has been changed.");
-      } else {
-        // console.log("error");
-      }
     }
   };
 

@@ -4,7 +4,6 @@ import Product from "@/models/Product";
 import mongoose from "mongoose";
 
 const Mugs = ({ products }) => {
-  // console.log(products);
   return (
     <div>
       <section className="text-gray-600 body-font min-h-screen">
@@ -28,13 +27,11 @@ const Mugs = ({ products }) => {
                     href={`/product/${products[item].slug}`}
                     className="block relative  rounded overflow-hidden"
                   >
-                    {/* <a className="block relative  rounded overflow-hidden"> */}
                     <img
                       alt="ecommerce"
                       className="m-auto md:mx-0 md:h-[36vh] h-[30vh] block"
                       src={products[item].img}
                     />
-                    {/* </a> */}
                   </Link>
                   <Link href={`/product/${products[item].slug}`}>
                     <div className="mt-4 text-center md:text-left">
@@ -103,7 +100,6 @@ const Mugs = ({ products }) => {
                 </div>
               );
             })}
-            {/* </Link> */}
           </div>
         </div>
       </section>

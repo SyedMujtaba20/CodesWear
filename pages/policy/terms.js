@@ -39,9 +39,9 @@ const TermsOfService = () => {
         <p className="text-lg text-gray-600 mb-6">
           You agree to use our services only for lawful purposes and in a way
           that does not infringe the rights of, restrict, or inhibit anyone
-          else's use and enjoyment of the website. Prohibited behavior includes
-          harassing or causing distress or inconvenience to any person and
-          transmitting obscene or offensive content.
+          else&apos;s use and enjoyment of the website. Prohibited behavior
+          includes harassing or causing distress or inconvenience to any person
+          and transmitting obscene or offensive content.
         </p>
 
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">

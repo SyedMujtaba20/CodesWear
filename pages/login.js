@@ -33,7 +33,6 @@ const Login = () => {
       body: JSON.stringify(data),
     });
     let response = await res.json();
-    // console.log("Success: ", response);
 
     setEmail("");
     setName("");

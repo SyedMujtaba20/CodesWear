@@ -48,13 +48,13 @@ const MyOrder = ({ order, clearCart }) => {
               .
             </p>
             <div class="flex mb-4">
-              <a class="flex-grow text-center py-2 text-lg px-1">
+              <Link class="flex-grow text-center py-2 text-lg px-1">
                 Item Description
               </Link>
-              <a class="flex-grow text-center border-gray-300 py-2 text-lg px-1">
+              <Link class="flex-grow text-center border-gray-300 py-2 text-lg px-1">
                 Quantity
               </Link>
-              <a class="flex-grow text-center border-gray-300 py-2 text-lg px-1">
+              <Link class="flex-grow text-center border-gray-300 py-2 text-lg px-1">
                 Item Total
               </Link>
             </div>

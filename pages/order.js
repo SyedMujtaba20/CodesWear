@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Order from "@/models/Order";
 import mongoose from "mongoose";
+import Link from "next/link";
 
 const MyOrder = ({ order, clearCart }) => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const MyOrder = ({ order, clearCart }) => {
     if (router.query.clearCart == 1) {
       clearCart();
     }
-  }, []);
+  }, [order, router.query.clearCart]);
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -32,7 +33,7 @@ const MyOrder = ({ order, clearCart }) => {
             <p className="leading-relaxed mb-4">
               Order placed on:{" "}
               {date &&
-                date.toLocalString("en-US", {
+                date.toLocaleString("en-US", {
                   weekday: "long",
                   year: "numeric",
                   month: "long",
@@ -49,16 +50,16 @@ const MyOrder = ({ order, clearCart }) => {
             <div class="flex mb-4">
               <a class="flex-grow text-center py-2 text-lg px-1">
                 Item Description
-              </a>
+              </Link>
               <a class="flex-grow text-center border-gray-300 py-2 text-lg px-1">
                 Quantity
-              </a>
+              </Link>
               <a class="flex-grow text-center border-gray-300 py-2 text-lg px-1">
                 Item Total
-              </a>
+              </Link>
             </div>
 
-            {Object.keys(products).map((item) => {
+            {Object.keys(products).map((key) => {
               return (
                 <div key={key} className="flex border-t border-gray-200 py-2">
                   <span className="text-gray-500">

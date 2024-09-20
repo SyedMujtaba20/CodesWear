@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function Customer404() {
   return (
@@ -20,18 +21,18 @@ export default function Customer404() {
           links to get you back on track:
         </p>
         <div className="flex justify-center space-x-4">
-          <a
+          <Link
             href="/"
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
           >
             Go to Homepage
-          </a>
-          <a
+          </Link>
+          <Link
             href="/contact"
             className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
           >
             Contact Support
-          </a>
+          </Link>
         </div>
       </div>
     </div>

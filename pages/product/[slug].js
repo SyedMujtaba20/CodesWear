@@ -14,22 +14,35 @@ const Slug = ({ addToCart, product, variants, buyNow, error }) => {
   const [size, setSize] = useState();
   const [color, setColor] = useState();
 
+  // useEffect(() => {
+  //   if (!error) {
+  //     setSize(product.size);
+  //     setColor(product.color);
+  //   }
+  // }, [router.query]);
+  // useEffect(() => {
+  //   if (color && !variants[color][size]) {
+  //     // If the current size isn't available for the selected color, pick the first available size
+  //     setSize(Object.keys(variants[color])[0]);
+  //   }
+  // }, [color, size]);
+
   useEffect(() => {
     if (!error) {
       setSize(product.size);
       setColor(product.color);
     }
-  }, [router.query]);
+  }, [error, product]);
+
   useEffect(() => {
-    if (color && !variants[color][size]) {
-      // If the current size isn't available for the selected color, pick the first available size
+    if (color && variants[color] && !variants[color][size]) {
       setSize(Object.keys(variants[color])[0]);
     }
-  }, [color, size]);
+  }, [color, size, variants]);
+
   const checkServiceability = async () => {
     let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
     let pinJson = await pins.json();
-    // if (Object.keys(pinJson).includes(pin)) {
     if (pin && Object.keys(pinJson).includes(pin) && pinJson[pin]) {
       setService(true);
       toast.success("Your Pincode is serviceable! ", {

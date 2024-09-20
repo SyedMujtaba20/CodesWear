@@ -1,5 +1,6 @@
 import Forgot from "@/models/Forgot";
 import User from "@/models/User";
+import Link from "next/link";
 
 export default async function handler(req, res) {
   if (req.body.sendMail) {
@@ -8,7 +9,7 @@ export default async function handler(req, res) {
     let email = `We have sent you this email in response to your request to reset your password on Codeswear.com.
 To reset your password , please follow the link below:
 
-                            <a href="http://localhost:3000/forgot?token=${token}">Click here to reset your passweord</a>
+                            <Link href="http://localhost:3000/forgot?token=${token}">Click here to reset your passweord</Link>
 
                             <br/><br/>
 

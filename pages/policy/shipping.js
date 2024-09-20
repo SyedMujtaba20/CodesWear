@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const ShippingPolicy = () => {
   return (
@@ -71,12 +72,12 @@ const ShippingPolicy = () => {
         </h2>
         <p className="text-lg text-gray-600 mb-6">
           If your package is lost or missing, please contact us at{" "}
-          <a
+          <Link
             href="mailto:codeswear@gmail.com"
             className="text-blue-500 underline"
           >
             codeswear@gmail.com
-          </a>{" "}
+          </Link>{" "}
           with your order number. We will do our best to assist you in tracking
           down your shipment.
         </p>
@@ -92,12 +93,12 @@ const ShippingPolicy = () => {
         <p className="text-lg text-gray-600 mb-6">
           For any further questions regarding shipping, feel free to contact us
           at{" "}
-          <a
+          <Link
             href="mailto:codeswear@gmail.com"
             className="text-blue-500 underline"
           >
             codeswear@gmail.com
-          </a>
+          </Link>
           .
         </p>
       </div>

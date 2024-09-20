@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const PrivacyPolicy = () => {
   return (
@@ -117,12 +118,12 @@ const PrivacyPolicy = () => {
         <p className="text-lg text-gray-600 mb-6">
           If you have any questions about this privacy policy or the personal
           data we hold about you, please contact us at{" "}
-          <a
+          <Link
             href="mailto:codeswear@gmail.com"
             className="text-blue-500 underline"
           >
             codeswear@gmail.com
-          </a>
+          </Link>
           .
         </p>
       </div>

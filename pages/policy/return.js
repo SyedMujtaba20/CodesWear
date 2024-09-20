@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const ReturnPolicy = () => {
   return (
@@ -31,12 +32,12 @@ const ReturnPolicy = () => {
         </h2>
         <p className="text-lg text-gray-600 mb-6">
           To initiate a return, please contact our customer service team at{" "}
-          <a
+          <Link
             href="mailto:codeswear@gmail.com"
             className="text-blue-500 underline"
           >
             codewear@gmail.com
-          </a>
+          </Link>
           . Make sure to include your order number and the reason for the
           return.
         </p>
@@ -66,12 +67,12 @@ const ReturnPolicy = () => {
         <p className="text-lg text-gray-600 mb-6">
           If you have any further questions about our return policy, please
           don&apos;t hesitate to reach out to us at{" "}
-          <a
+          <Link
             href="mailto:codeswear@gmail.com"
             className="text-blue-500 underline"
           >
             codeswear@gmail.com
-          </a>
+          </Link>
           .
         </p>
       </div>

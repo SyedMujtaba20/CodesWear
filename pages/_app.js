@@ -12,23 +12,56 @@ export default function App({ Component, pageProps }) {
   const [key, setKey] = useState();
   const [progress, setProgress] = useState(0);
   const router = useRouter();
+  // useEffect(() => {
+  //   router.events.on("routeChangeStart", () => setProgress(40));
+  //   router.events.on("routeChangeComplete", () => setProgress(100));
+  //   try {
+  //     if (localStorage.getItem("cart")) {
+  //       setCart(JSON.parse(localStorage.getItem("cart")));
+  //       saveCart(JSON.parse(localStorage.getItem("cart")));
+  //     }
+  //   } catch (error) {
+  //     localStorage.clear();
+  //   }
+  //   const myuser = JSON.parse(localStorage.getItem("myuser"));
+  //   if (myuser) {
+  //     setUser({ value: myuser.token, email: myuser.email });
+  //   }
+  //   setKey(Math.random());
+  // }, [router.query]);
+
   useEffect(() => {
-    router.events.on("routeChangeStart", () => setProgress(40));
-    router.events.on("routeChangeComplete", () => setProgress(100));
+    const handleRouteChangeStart = () => setProgress(40);
+    const handleRouteChangeComplete = () => setProgress(100);
+
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
+    // Cleanup event listeners
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
+    };
+  }, [router.events]);
+
+  useEffect(() => {
     try {
       if (localStorage.getItem("cart")) {
-        setCart(JSON.parse(localStorage.getItem("cart")));
-        saveCart(JSON.parse(localStorage.getItem("cart")));
+        const storedCart = JSON.parse(localStorage.getItem("cart"));
+        setCart(storedCart);
+        saveCart(storedCart);
       }
     } catch (error) {
       localStorage.clear();
     }
+
     const myuser = JSON.parse(localStorage.getItem("myuser"));
     if (myuser) {
       setUser({ value: myuser.token, email: myuser.email });
     }
+
     setKey(Math.random());
-  }, [router.query]);
+  }, []); // This effect runs only once when the component mounts
 
   const logout = () => {
     localStorage.removeItem("myuser");

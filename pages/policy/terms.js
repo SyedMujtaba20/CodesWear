@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const TermsOfService = () => {
@@ -70,13 +71,13 @@ const TermsOfService = () => {
         <p className="text-lg text-gray-600 mb-6">
           Our shipping and returns policy is detailed separately and is
           incorporated into these Terms of Service. Please review our{" "}
-          <a href="/policy/shipping" className="text-blue-500 underline">
+          <Link href="/policy/shipping" className="text-blue-500 underline">
             Shipping Policy
-          </a>{" "}
+          </Link>{" "}
           and{" "}
-          <a href="/policy/return" className="text-blue-500 underline">
+          <Link href="/policy/return" className="text-blue-500 underline">
             Return Policy
-          </a>
+          </Link>
           .
         </p>
 
@@ -123,12 +124,12 @@ const TermsOfService = () => {
         <p className="text-lg text-gray-600 mb-6">
           If you have any questions or concerns regarding these Terms of
           Service, please contact us at{" "}
-          <a
+          <Link
             href="mailto:codeswear@gmail.com"
             className="text-blue-500 underline"
           >
             codeswear@gmail.com
-          </a>
+          </Link>
           .
         </p>
       </div>

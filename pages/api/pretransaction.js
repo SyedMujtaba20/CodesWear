@@ -2,7 +2,7 @@ const https = require("https");
 import connectDb from "@/middleware/mongoose";
 import Order from "@/models/Order";
 import Product from "@/models/Product";
-import pincodes from "../../pincodes.json";
+import pincodes from "./pincode";
 /*
  * import checksum generation utility
  * You can get this utility from https://developer.paytm.com/docs/checksum/

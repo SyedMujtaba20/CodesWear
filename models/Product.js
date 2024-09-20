@@ -16,19 +16,26 @@ const ProductSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-console.log("ggghd");
-console.log("Mongoose import:", mongoose);
-console.log("kkkk");
-console.log("Mongoose Schema:", ProductSchema);
-console.log("ppp");
-console.log("Mongoose Models:", mongoose.models);
+// console.log("ggghd");
+// console.log("Mongoose import:", mongoose);
+// console.log("kkkk");
+// console.log("Mongoose Schema:", ProductSchema);
+// console.log("ppp");
+// console.log("Mongoose Models:", mongoose.models);
 
 // mongoose.model = {};
 // export default mongoose.model("Product", ProductSchema);
 // Check if the model already exists, and if not, define it
-export default mongoose.models.Product ||
+export default mongoose.models?.Product ||
   mongoose.model("Product", ProductSchema);
 
 // export default Product;
 // const Product = mongoose.models("Product", ProductSchema);
 // module.exports = Product;
+
+// Initialize the model only if it doesn't exist
+// const Product =
+//   mongoose.models.Product || mongoose.model("Product", ProductSchema);
+
+// // Export the model after initialization
+// export default Product;

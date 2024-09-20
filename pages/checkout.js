@@ -7,6 +7,7 @@ import Script from "next/script";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import getproducts from "./api/getproducts";
+import Product from "@/models/Product";
 
 const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const [name, setName] = useState("");
@@ -92,7 +93,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
       setAddress(e.target.value);
     } else if (e.target.name == "pincode") {
       setPincode(e.target.value);
-      if (e.target.value.length == 6) {
+      if (e.target.value.length == 5) {
         getPincode(e.target.value);
       } else {
         setState("");
@@ -121,7 +122,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
       body: JSON.stringify(data),
     });
     let txnRes = await a.json();
-    console.log(txnRes);
+    // console.log(txnRes);
     if (txnRes.success) {
       let txnToken = txnRes.txnToken;
       //Config
@@ -138,7 +139,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
 
         handler: {
           notifyMerchant: function (eventType, data) {
-            console.log("notify merchant called", eventType, data);
+            // console.log("notify merchant called", eventType, data);
           },
         },
       };
@@ -148,10 +149,10 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
           window.Paytm.Checkout.invoke();
         })
         .catch(function onError(error) {
-          console.log("error => ", error);
+          // console.log("error => ", error);
         });
     } else {
-      console.log(txnRes.error);
+      // console.log(txnRes.error);
       if (txnRes.cartClear) {
         clearCart();
       }

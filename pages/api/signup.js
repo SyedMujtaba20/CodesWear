@@ -2,61 +2,55 @@ import connectDb from "@/middleware/mongoose";
 import User from "@/models/User";
 var CryptoJS = require("crypto-js");
 
+console.log("kkkkkkk");
 const handler = async (req, res) => {
-  console.log("Request method:", req.method);
-  console.log("Request headers:", req.headers);
-  console.log("Request body:", req.body); // Log the request body
-
+  console.log("nice");
   if (req.method === "POST") {
+    console.log("heeeeellloo");
     try {
-      console.log("Request body (inside POST):", req.body);
-      const { name, email } = req.body;
-      let u = new User({
+      console.log("hdufgfughfsdddd");
+      const { name, email, password } = req.body;
+
+      if (!name || !email || !password) {
+        console.log("HHHHHHHHHHHHH");
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      // Check if the user already exists
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({ error: "User already exists" });
+      }
+
+      // Encrypt password
+      const encryptedPassword = CryptoJS.AES.encrypt(
+        password,
+        process.env.AES_SECRET
+      ).toString();
+
+      const newUser = new User({
         name,
         email,
-        password: CryptoJS.AES.encrypt(
-          req.body.password,
-          process.env.AES_SECRET
-        ).toString(),
+        password: encryptedPassword,
       });
-      await u.save();
-      res.status(200).json({ success: "success" });
+      console.log("loooog");
+      await newUser.save();
+      console.log("loooog0000000");
+      res.status(200).json({ success: "User created successfully" });
     } catch (error) {
-      console.error("Error saving products:", error);
-      res.status(500).json({ error: "Failed to save products" });
+      console.log("uuuuuuuu");
+      console.error("Error saving user:", error);
+      res.setHeader("Allow", ["POST"]);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
+      res
+        .status(500)
+        .json({ error: "Failed to save user", details: error.message });
     }
   } else {
-    console.log("Invalid method");
+    // if (error) {
+    console.log("okkkkay");
     res.status(400).json({ error: "This method is not allowed." });
   }
 };
 
 export default connectDb(handler);
-
-// import Product from "@/models/Product";
-// import connectDb from "@/middleware/mongoose";
-
-// const handler = async (req, res) => {
-//   if (req.method == "POST") {
-//     for (let i = 0; i < req.body.length; i++) {
-//       let p = new Product({
-//         title: req.body[i].title,
-//         slug: req.body[i].slug,
-//         desc: req.body[i].desc,
-//         img: req.body[i].img,
-//         category: req.body[i].category,
-//         size: req.body[i].size,
-//         color: req.body[i].color,
-//         price: req.body[i].price,
-//         availableQty: req.body[i].availableQty,
-//       });
-//       await p.save();
-//     }
-
-//     res.status(200).json({ success: "success" });
-//   } else {
-//     res.status(400).json({ error: "This method is not allowed." });
-//   }
-// };
-
-// export default connectDb(handler);

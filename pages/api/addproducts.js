@@ -2,13 +2,13 @@ import Product from "@/models/Product";
 import connectDb from "@/middleware/mongoose";
 
 const handler = async (req, res) => {
-  console.log("Request method:", req.method);
-  console.log("Request headers:", req.headers);
-  console.log("Request body:", req.body); // Log the request body
+  // console.log("Request method:", req.method);
+  // console.log("Request headers:", req.headers);
+  // console.log("Request body:", req.body); // Log the request body
 
   if (req.method === "POST") {
     try {
-      console.log("Request body (inside POST):", req.body); // Log the request body inside the POST check
+      // console.log("Request body (inside POST):", req.body); // Log the request body inside the POST check
       for (let i = 0; i < req.body.length; i++) {
         let p = new Product({
           title: req.body[i].title,
@@ -25,11 +25,11 @@ const handler = async (req, res) => {
       }
       res.status(200).json({ success: "success" });
     } catch (error) {
-      console.error("Error saving products:", error);
+      // console.error("Error saving products:", error);
       res.status(500).json({ error: "Failed to save products" });
     }
   } else {
-    console.log("Invalid method");
+    // console.log("Invalid method");
     res.status(400).json({ error: "This method is not allowed." });
   }
 };

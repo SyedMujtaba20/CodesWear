@@ -12,4 +12,5 @@ const ForgotSchema = new mongoose.Schema(
 
 // mongoose.models = {};
 // export default mongoose.model("User", UserSchema);
-export default mongoose.models.Forgot || mongoose.model("Forgot", ForgotSchema);
+export default mongoose.models?.Forgot ||
+  mongoose.model("Forgot", ForgotSchema);

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDb = (handler) => async (req, res) => {
   console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-  console.log("MONGO_URI:", process.env.MONGO_URI);
+  // console.log("MONGO_URI:", process.env.MONGO_URI);
 
   if (mongoose.connections[0].readyState) {
     return handler(req, res);

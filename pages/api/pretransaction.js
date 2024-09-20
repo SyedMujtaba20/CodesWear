@@ -102,7 +102,7 @@ const handler = async (req, res) => {
     paytmParams.body = {
       requestType: "Payment",
       mid: process.env.NEXT_PUBLIC_PAYTM_MID,
-      websiteName: "YOUR_WEBSITE_NAME",
+      websiteName: "codeswear",
       orderId: req.body.oid,
       callbackUrl: `${process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
       txnAmount: {
@@ -151,7 +151,7 @@ const handler = async (req, res) => {
           });
 
           post_res.on("end", function () {
-            console.log("Response: ", response);
+            // console.log("Response: ", response);
             let ress = JSON.parse(response).body;
             ress.success = true;
             (ress.cartClear = false), resolve(ress);

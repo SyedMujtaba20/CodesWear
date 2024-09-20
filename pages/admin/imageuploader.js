@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import FullLayout from "../../src/layouts/FullLayout";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../src/theme/theme";
-import { Grid, ImageList, ImageListItem } from "@mui/material";
+import mongoose from "mongoose";
+import Product from "@/models/Product";
+import {
+  Grid,
+  ImageList,
+  ImageListItem,
+  Modal,
+  Box,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import BaseCard from "../../src/components/baseCard/BaseCard";
+import { ImCross } from "react-icons/im"; // Import ImCross from react-icons
 
+// Function to generate srcSet for responsive images
 function srcset(image, size, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -14,83 +26,26 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-    author: "@arwinneil",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-    rows: 4,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
-    rows: 4,
-    cols: 2,
-  },
-];
+const ImageUploader = ({ products = [] }) => {
+  // State to manage the modal open/close and the currently selected image
+  const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
-const ImageUploader = () => {
+  // Handle opening the modal with a specific image
+  const handleOpen = (img) => {
+    setSelectedImage(img);
+    setOpen(true);
+  };
+
+  // Handle closing the modal
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedImage("");
+  };
+
+  // Ensure products is an array
+  const productArray = Array.isArray(products) ? products : [];
+
   return (
     <ThemeProvider theme={theme}>
       <style jsx global>{`
@@ -99,7 +54,6 @@ const ImageUploader = () => {
         }
       `}</style>
       <FullLayout>
-        {" "}
         <Grid container spacing={0}>
           <Grid item xs={12} lg={12}>
             <BaseCard title="Upload an Image">
@@ -109,25 +63,88 @@ const ImageUploader = () => {
                 cols={4}
                 rowHeight={121}
               >
-                {itemData.map((item) => (
-                  <ImageListItem
-                    key={item.img}
-                    cols={item.cols || 1}
-                    rows={item.rows || 1}
-                  >
-                    <img
-                      {...srcset(item.img, 121, item.rows, item.cols)}
-                      alt={item.title}
-                      loading="lazy"
-                    />
+                {productArray.length > 0 ? (
+                  productArray.map((product) => (
+                    <ImageListItem
+                      key={product._id} // Ensure _id is available
+                      cols={1}
+                      rows={1}
+                      onClick={() => handleOpen(product.img)} // Open modal on image click
+                    >
+                      <img
+                        {...srcset(product.img, 121, 1, 1)}
+                        alt={product.title}
+                        loading="lazy"
+                      />
+                    </ImageListItem>
+                  ))
+                ) : (
+                  <ImageListItem cols={4}>
+                    <Typography>No products available</Typography>
                   </ImageListItem>
-                ))}
+                )}
               </ImageList>
             </BaseCard>
           </Grid>
         </Grid>
+
+        {/* Modal for displaying the larger image */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "80%",
+              height: "80%",
+              bgcolor: "background.paper",
+              boxShadow: 24,
+              p: 4,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <IconButton
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                top: 10,
+                right: 10,
+                color: "grey.500",
+              }}
+            >
+              <ImCross size={24} /> {/* Use ImCross from react-icons */}
+            </IconButton>
+            <img
+              src={selectedImage}
+              alt="Large preview"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </Box>
+        </Modal>
       </FullLayout>
     </ThemeProvider>
   );
 };
+
 export default ImageUploader;
+
+export async function getServerSideProps(context) {
+  let error = null;
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI);
+  }
+  let products = await Product.find();
+  return { props: { products: JSON.parse(JSON.stringify(products)) } };
+}

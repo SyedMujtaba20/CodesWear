@@ -38,7 +38,7 @@ const handler = async (req, res) => {
       res.status(400).json({ error: "error" });
     }
   } catch (error) {
-    console.error("Database query error:", error);
+    // console.error("Database query error:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

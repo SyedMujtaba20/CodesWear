@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,7 +33,7 @@ const Login = () => {
       body: JSON.stringify(data),
     });
     let response = await res.json();
-    console.log("Success: ", response);
+    // console.log("Success: ", response);
 
     setEmail("");
     setName("");

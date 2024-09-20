@@ -29,7 +29,7 @@ const Navbar = ({
     if (exempted.includes(router.pathname)) {
       setSidebar(false);
     }
-  }, []);
+  }, [router.pathname]);
   const toggleDropDown = () => {
     setDropdown(!dropdown);
   };

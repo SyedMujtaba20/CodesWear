@@ -27,31 +27,65 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { name, email, password };
+    console.log("Submitting form", data);
+    console.log("jujujuj");
 
-    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    let response = await res.json();
-    console.log("Success: ", response);
+    try {
+      console.log("jjjjjjjjjjjjj");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }); // console.log(data.method); // This will log the request method to the console
+      const response = await res.json();
+      console.log("Response from API", res);
+      console.log("API Host:", process.env.NEXT_PUBLIC_HOST);
 
-    setEmail("");
-    setName("");
-    setPassword("");
-    toast.success("Your account has been created!", {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      // transition: Bounce,
-    });
+      console.log("yyyyyyyyy");
+      console.log("Success:", response);
+
+      if (res.ok) {
+        setEmail("");
+        setName("");
+        setPassword("");
+        toast.success("Your account has been created!", {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        toast.error(response.error || "Failed to create account", {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      console.log("eeeeeee");
+      console.error("Error during sign up:", error);
+      toast.error("An error occurred while creating your account.", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (
@@ -66,8 +100,7 @@ const Signup = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
-        // transition: Bounce,
+        theme="light" // transition: Bounce,
       />
       <div className="min-h-screen flex items-start justify-center py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
@@ -167,6 +200,7 @@ const Signup = () => {
                     />
                   </svg>
                 </span>
+                {console.log("newwwwww")}
                 Sign up
               </button>
             </div>

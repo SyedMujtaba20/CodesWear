@@ -7,14 +7,14 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Chip,
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
 
-const AllProducts = ({ products }) => {
+const AllProducts = ({ products = [] }) => {
   useEffect(() => {
-    console.log(products);
-  }, []);
+    // console.log(products);
+  }, [products]);
+
   return (
     <BaseCard title="All Products">
       <Table
@@ -22,6 +22,9 @@ const AllProducts = ({ products }) => {
         sx={{
           mt: 3,
           whiteSpace: "nowrap",
+          tableLayout: "fixed", // Makes sure the columns have fixed width
+          width: "100%",
+          overflowX: "auto", // Allows horizontal scrolling if content overflows
         }}
       >
         <TableHead>
@@ -54,62 +57,80 @@ const AllProducts = ({ products }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => (
-            <TableRow key={product.slug}>
-              <TableCell>
-                <Typography
+          {products.length > 0 ? (
+            products.map((product) => (
+              <TableRow key={product.slug}>
+                {/* Title */}
+                <TableCell>
+                  <Typography
+                    sx={{
+                      fontSize: "15px",
+                      fontWeight: "500",
+                      whiteSpace: "nowrap", // Prevent wrapping of title
+                    }}
+                    noWrap
+                  >
+                    {product.title}
+                  </Typography>
+                </TableCell>
+                {/* Slug */}
+                <TableCell
                   sx={{
-                    fontSize: "15px",
-                    fontWeight: "500",
+                    maxWidth: "150px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
                   }}
                 >
-                  {product.title}
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontWeight: "600",
-                      }}
-                    >
-                      {product.slug}
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      sx={{
-                        fontSize: "13px",
-                      }}
-                    ></Typography>
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Box>
+                      <Typography
+                        variant="h6"
+                        sx={{ fontWeight: "600" }}
+                        noWrap
+                      >
+                        {product.slug}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </TableCell>
-              <TableCell>
-                {" "}
-                <img
-                  style={{ height: "42px", margin: "0 12px" }}
-                  src={product.img}
-                  alt=""
-                />
-              </TableCell>
-              <TableCell>
-                <Typography color="textSecondary" variant="h6">
-                  {product.size}/{product.color}
-                </Typography>
-              </TableCell>
-              <TableCell></TableCell>
-              <TableCell align="right">
-                <Typography>Rs. {product.price}</Typography>
+                </TableCell>
+                {/* Image */}
+                <TableCell sx={{ maxWidth: "80px" }}>
+                  <img
+                    style={{
+                      height: "42px",
+                      width: "42px",
+                      objectFit: "cover",
+                      margin: "0 auto",
+                    }}
+                    src={product.img}
+                    alt={product.title}
+                  />
+                </TableCell>
+                {/* Size/Color */}
+                <TableCell sx={{ maxWidth: "120px" }}>
+                  <Typography color="textSecondary" variant="h6">
+                    {Array.isArray(product.size)
+                      ? product.size.join(", ")
+                      : product.size}
+                    /
+                    {Array.isArray(product.color)
+                      ? product.color.join(", ")
+                      : product.color}
+                  </Typography>
+                </TableCell>
+                {/* Price */}
+                <TableCell align="right">
+                  <Typography>Rs. {product.price}</Typography>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5}>
+                <Typography>No products available</Typography>
               </TableCell>
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
     </BaseCard>

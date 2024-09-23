@@ -57,7 +57,7 @@ const Navbar = ({
           }}
         >
           {dropdown && (
-            <div className="absolute right-5 bg-white shadow-lg border top-5 py-4 rounded-md px-5 w-32">
+            <div className="absolute right-5 bg-white shadow-lg border top-5 py-4 rounded-md px-5 w-32 z-30">
               <ul>
                 <Link href={"/myaccount"}>
                   <li className="py-1 hover:text-pink-700 text-sm font-bold">
@@ -80,7 +80,7 @@ const Navbar = ({
           )}
 
           {user.value && (
-            <MdAccountCircle className="text-xl md:text-2xl fixed right-8 mx-8 mt-6 z-50" />
+            <MdAccountCircle className="text-xl md:text-2xl fixed right-8 mx-8 z-30" />
           )}
         </span>
       )}
@@ -128,7 +128,7 @@ const Navbar = ({
 
         <div
           ref={ref}
-          className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 bg-pink-100 px-8 py-10 transition-all ${
+          className={`w-72 h-[100vh] sideCart overflow-y-scroll z-30 absolute top-0 bg-pink-100 px-8 py-10 transition-all ${
             sidebar ? "right-0 " : "-right-96 "
           }translate-x-0`}
         >

@@ -80,7 +80,7 @@ const Navbar = ({
           )}
 
           {user.value && (
-            <MdAccountCircle className="text-xl md:text-2xl mx-2" />
+            <MdAccountCircle className="text-xl md:text-2xl mx-4 mt-6" />
           )}
         </span>
       )}

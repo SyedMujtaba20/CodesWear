@@ -32,11 +32,11 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
 
   useEffect(() => {
     if (
-      name.length > 3 &&
-      email.length > 3 &&
-      phone.length > 3 &&
-      address.length > 3 &&
-      pincode.length > 3
+      (name?.length || 0) > 3 &&
+      (email?.length || 0) > 3 &&
+      (phone?.length || 0) > 3 &&
+      (address?.length || 0) > 3 &&
+      (pincode?.length || 0) > 3
     ) {
       setDisabled(false);
     } else {

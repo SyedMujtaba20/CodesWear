@@ -108,16 +108,18 @@ export default function App({ Component, pageProps }) {
       />
            {" "}
       {key && (
-        <Navbar
-          Logout={logout}
-          user={user}
-          key={key}
-          cart={cart}
-          addToCart={addToCart}
-          removeFromCart={removeFromCart}
-          clearCart={clearCart}
-          subTotal={subTotal}
-        />
+        <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+          <Navbar
+            Logout={logout}
+            user={user}
+            key={key}
+            cart={cart}
+            addToCart={addToCart}
+            removeFromCart={removeFromCart}
+            clearCart={clearCart}
+            subTotal={subTotal}
+          />
+        </div>
       )}
       <Component
         buyNow={buyNow}

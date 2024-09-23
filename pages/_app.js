@@ -1,34 +1,18 @@
-import "@/styles/globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import LoadingBar from "react-top-loading-bar";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({});
   const [subTotal, setSubTotal] = useState(0);
   const [user, setUser] = useState({ value: null });
   const [key, setKey] = useState();
+  const [loading, setLoading] = useState(true); // Add loading state
   const [progress, setProgress] = useState(0);
   const router = useRouter();
-  // useEffect(() => {
-  //   router.events.on("routeChangeStart", () => setProgress(40));
-  //   router.events.on("routeChangeComplete", () => setProgress(100));
-  //   try {
-  //     if (localStorage.getItem("cart")) {
-  //       setCart(JSON.parse(localStorage.getItem("cart")));
-  //       saveCart(JSON.parse(localStorage.getItem("cart")));
-  //     }
-  //   } catch (error) {
-  //     localStorage.clear();
-  //   }
-  //   const myuser = JSON.parse(localStorage.getItem("myuser"));
-  //   if (myuser) {
-  //     setUser({ value: myuser.token, email: myuser.email });
-  //   }
-  //   setKey(Math.random());
-  // }, [router.query]);
 
   useEffect(() => {
     const handleRouteChangeStart = () => setProgress(40);
@@ -37,7 +21,6 @@ export default function App({ Component, pageProps }) {
     router.events.on("routeChangeStart", handleRouteChangeStart);
     router.events.on("routeChangeComplete", handleRouteChangeComplete);
 
-    // Cleanup event listeners
     return () => {
       router.events.off("routeChangeStart", handleRouteChangeStart);
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
@@ -61,7 +44,8 @@ export default function App({ Component, pageProps }) {
     }
 
     setKey(Math.random());
-  }, []); // This effect runs only once when the component mounts
+    setLoading(false); // User info is retrieved, stop loading
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("myuser");
@@ -79,8 +63,9 @@ export default function App({ Component, pageProps }) {
     }
     setSubTotal(subt);
   };
+
   const addToCart = (itemCode, qty, price, name, size, variant) => {
-    if (Object.keys(cart).length == 0) {
+    if (Object.keys(cart).length === 0) {
       setKey(Math.random());
     }
     let newCart = cart;
@@ -90,22 +75,14 @@ export default function App({ Component, pageProps }) {
       newCart[itemCode] = { qty: 1, price, name, size, variant };
     }
     setCart(newCart);
-
     saveCart(newCart);
   };
 
-  const buyNow = (itemCode, qty, price, name, size, variant) => {
-    let newCart = {};
-    newCart[itemCode] = { qty: 1, price, name, size, variant };
-
-    setCart(newCart);
-    saveCart(newCart);
-    router.push("/checkout");
-  };
   const clearCart = () => {
     setCart({});
     saveCart({});
   };
+
   const removeFromCart = (itemCode, qty, price, name, size, variant) => {
     let newCart = cart;
     if (itemCode in cart) {
@@ -117,6 +94,7 @@ export default function App({ Component, pageProps }) {
     setCart(newCart);
     saveCart(newCart);
   };
+
   return (
     <>
       <LoadingBar
@@ -125,7 +103,7 @@ export default function App({ Component, pageProps }) {
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
-      {key && (
+      {!loading && ( // Only render Navbar when not loading
         <Navbar
           Logout={logout}
           user={user}
@@ -139,7 +117,7 @@ export default function App({ Component, pageProps }) {
       )}
 
       <Component
-        buyNow={buyNow}
+        buyNow={addToCart}
         cart={cart}
         addToCart={addToCart}
         removeFromCart={removeFromCart}
@@ -147,7 +125,6 @@ export default function App({ Component, pageProps }) {
         subTotal={subTotal}
         {...pageProps}
       />
-
       <Footer />
     </>
   );

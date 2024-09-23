@@ -10,10 +10,11 @@ export default function App({ Component, pageProps }) {
   const [subTotal, setSubTotal] = useState(0);
   const [user, setUser] = useState({ value: null });
   const [key, setKey] = useState();
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const router = useRouter();
 
+  // Handle route change progress bar
   useEffect(() => {
     const handleRouteChangeStart = () => setProgress(40);
     const handleRouteChangeComplete = () => setProgress(100);
@@ -25,8 +26,9 @@ export default function App({ Component, pageProps }) {
       router.events.off("routeChangeStart", handleRouteChangeStart);
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
     };
-  }, [router.events]);
+  }, [router]); // Added [router] to the dependency array
 
+  // Initialize cart and user info
   useEffect(() => {
     try {
       if (localStorage.getItem("cart")) {
@@ -44,8 +46,8 @@ export default function App({ Component, pageProps }) {
     }
 
     setKey(Math.random());
-    setLoading(false); // User info is retrieved, stop loading
-  }, []);
+    setLoading(false); // Stop loading after user and cart info is loaded
+  }, [router]); // Added router as a dependency to cover navigation behavior
 
   const logout = () => {
     localStorage.removeItem("myuser");
@@ -65,9 +67,6 @@ export default function App({ Component, pageProps }) {
   };
 
   const addToCart = (itemCode, qty, price, name, size, variant) => {
-    if (Object.keys(cart).length === 0) {
-      setKey(Math.random());
-    }
     let newCart = cart;
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
@@ -76,6 +75,9 @@ export default function App({ Component, pageProps }) {
     }
     setCart(newCart);
     saveCart(newCart);
+    if (Object.keys(cart).length === 0) {
+      setKey(Math.random());
+    }
   };
 
   const clearCart = () => {

@@ -9,7 +9,7 @@ import ProfileDD from "./ProfileDD";
 const Header = ({ sx, customClass, toggleMobileSidebar, position }) => {
   return (
     <AppBar sx={sx} position={position} elevation={0} className={customClass}>
-      <Toolbar>
+      <Toolbar sx={{ height: "90px" }}>
         <IconButton
           size="large"
           color="inherit"

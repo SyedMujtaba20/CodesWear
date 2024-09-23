@@ -48,7 +48,7 @@ const Navbar = ({
     <>
       {!sidebar && (
         <span
-          className="fixed right-9 top-4 z-30 cursor-pointer"
+          className="fixed right-9 top-4  cursor-pointer flex justify-center z-50"
           onMouseOver={() => {
             setDropdown(true);
           }}
@@ -80,14 +80,15 @@ const Navbar = ({
           )}
 
           {user.value && (
-            <MdAccountCircle className="text-xl md:text-2xl mx-4 mt-6" />
+            <MdAccountCircle className="text-xl md:text-2xl fixed right-8 mx-8 mt-6 z-50" />
           )}
         </span>
       )}
       <div
-        className={`flex flex-col md:flex-row md:justify-start justify-center items-center  py-2 shadow-md sticky top-0 bg-white z-10 ${
+        className={`flex flex-col md:flex-row md:justify-start justify-center items-center  py-2 shadow-md sticky top-0 bg-white ${
           !sidebar && "overflow-hidden"
         }`}
+        style={{ height: "70px" }}
       >
         <div className="logo mr-auto  md:mx-5">
           <Link href={"/"}>
@@ -113,7 +114,7 @@ const Navbar = ({
         <div className="cursor-pointer items-center cart absolute top-4 right-0 mx-5 flex">
           {!user.value && (
             <Link href={"/login"}>
-              <button className="bg-pink-600 px-2 py-1 rounded-md text-sm text-white mx-2">
+              <button className="bg-pink-600 px-2 py-1 rounded-md text-sm text-white mx-5">
                 Login
               </button>
             </Link>
@@ -121,7 +122,7 @@ const Navbar = ({
 
           <AiOutlineShoppingCart
             onClick={toggleCart}
-            className="text-xl md:text-2xl"
+            className="text-xl md:text-2xl mx-2 "
           />
         </div>
 
@@ -129,7 +130,7 @@ const Navbar = ({
           ref={ref}
           className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 bg-pink-100 px-8 py-10 transition-all ${
             sidebar ? "right-0 " : "-right-96 "
-          }translate-x-0 z-50`}
+          }translate-x-0`}
         >
           <h2 className="font-bold text-xl text-center">Shopping Cart</h2>
           <span

@@ -28,7 +28,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
       setEmail(myuser.email);
       fetchData(myuser.tokenmy);
     }
-  }, []);
+  }, [fetchData]);
 
   useEffect(() => {
     if (
